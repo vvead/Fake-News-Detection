@@ -21,13 +21,8 @@ def home():
 def prediction():
     if request.method == "POST":
         news = [request.form['news']]
-
-        
-        print(news)
         news = tokenizer.texts_to_sequences(news)
-        print(news)
         news = pad_sequences(news, maxlen=max_length)
-        
         val_pkl = news
         predict ='FAKE' if ((model.predict(val_pkl)>=0.5).astype(int)).all() == 0 else 'REAL'
 
